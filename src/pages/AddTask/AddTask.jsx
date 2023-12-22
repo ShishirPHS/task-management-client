@@ -1,8 +1,10 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import useAuth from "../../hooks/useAuth";
 
 const AddTask = () => {
   const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -12,9 +14,7 @@ const AddTask = () => {
     const deadline = form.deadline.value;
     const priority = form.priority.value;
 
-    const task = { title, description, deadline, priority };
-
-    console.log(title, description, deadline, priority);
+    const task = { title, description, deadline, priority, user: user.email };
 
     axiosPublic
       .post("/api/user/task/create", task)
