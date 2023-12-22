@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignIn = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
 
-  const handleSignUpForm = (e) => {
+  const handleSignInForm = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -34,33 +34,9 @@ const SignUp = () => {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content container flex-col py-20">
-        <h2 className="font-bold text-4xl mb-12">Sign Up Please!</h2>
+        <h2 className="font-bold text-4xl mb-12">Sign In Please!</h2>
         <div className="card w-3/4 shadow-2xl bg-base-100">
-          <form onSubmit={handleSignUpForm} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Name</span>
-              </label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
-              </label>
-              <input
-                type="text"
-                name="photo"
-                placeholder="Photo URL"
-                className="input input-bordered"
-                required
-              />
-            </div>
+          <form onSubmit={handleSignInForm} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -86,7 +62,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Sign Up</button>
+              <button className="btn btn-primary">Sign In</button>
             </div>
           </form>
         </div>
@@ -95,4 +71,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
