@@ -14,7 +14,14 @@ const AddTask = () => {
     const deadline = form.deadline.value;
     const priority = form.priority.value;
 
-    const task = { title, description, deadline, priority, user: user.email };
+    const task = {
+      title,
+      description,
+      deadline,
+      priority,
+      user: user.email,
+      status: "to-do",
+    };
 
     axiosPublic
       .post("/api/user/task/create", task)

@@ -1,0 +1,29 @@
+.dashboard ul li {
+  padding: 4px 0;
+}
+
+.dashboard ul li a {
+  text-transform: uppercase;
+  color: #131313;
+  font-weight: 700;
+  padding: 0;
+  font-size: 14px;
+}
+
+.dashboard ul li a:hover {
+  text-decoration: underline;
+  color: #736363;
+  background: none;
+}
+
+.dashboard ul li a.active {
+  text-decoration: underline;
+  color: #736363;
+  background: none !important;
+}
+
+.dashboard ul li a:active {
+  text-decoration: underline;
+  color: #736363;
+  background: none !important;
+}
