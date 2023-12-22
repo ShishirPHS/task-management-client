@@ -41,9 +41,6 @@ const Navbar = () => {
       {user ? (
         <>
           <li>
-            <NavLink to="/addTask">Add Task</NavLink>
-          </li>
-          <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
           <button

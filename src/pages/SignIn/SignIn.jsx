@@ -26,6 +26,10 @@ const SignIn = () => {
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          text: err.message,
+        });
       });
   };
 
