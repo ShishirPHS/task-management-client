@@ -1,18 +1,32 @@
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user } = useAuth();
+
   const navLinks = (
     <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink to="/signIn">Sign In</NavLink>
-      </li>
-      <li>
-        <NavLink to="/signUp">Sign Up</NavLink>
-      </li>
+      {user ? (
+        <>
+          <li>
+            <NavLink to="/addTask">Add Task</NavLink>
+          </li>
+          <button className="sign-out-btn ml-4">Sign Out</button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to="/signIn">Sign In</NavLink>
+          </li>
+          <li>
+            <NavLink to="/signUp">Sign Up</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
