@@ -1,4 +1,9 @@
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+
 const AddTask = () => {
+  const axiosPublic = useAxiosPublic();
+
   const handleAddTask = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -6,7 +11,29 @@ const AddTask = () => {
     const description = form.description.value;
     const deadline = form.deadline.value;
     const priority = form.priority.value;
+
+    const task = { title, description, deadline, priority };
+
     console.log(title, description, deadline, priority);
+
+    axiosPublic
+      .post("/api/user/task/create", task)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Task added Successfully",
+          });
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: error.message,
+          icon: "error",
+        });
+      });
   };
 
   return (
