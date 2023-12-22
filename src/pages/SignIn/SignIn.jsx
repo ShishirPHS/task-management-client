@@ -3,25 +3,23 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const { createUser } = useAuth();
+  const { userSignIn } = useAuth();
   const navigate = useNavigate();
 
   const handleSignInForm = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
-    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photo, email, password);
+    console.log(email, password);
 
-    createUser(email, password)
+    userSignIn(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         Swal.fire({
           icon: "success",
-          text: "Sign Up Successful",
+          text: "Sign In Successful",
         });
 
         navigate("/");
