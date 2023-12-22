@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -43,7 +43,10 @@ const Navbar = () => {
           <li>
             <NavLink to="/addTask">Add Task</NavLink>
           </li>
-          <button onClick={handleSignOut} className="sign-out-btn ml-4">
+          <button
+            onClick={handleSignOut}
+            className="sign-out-btn px-4 py-2 ml-[5px]"
+          >
             Sign Out
           </button>
         </>
@@ -88,7 +91,9 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <a className="text-3xl font-bold">PriorityPulse</a>
+          <Link to="/" className="text-3xl font-bold">
+            PriorityPulse
+          </Link>
         </div>
         <div className="hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>

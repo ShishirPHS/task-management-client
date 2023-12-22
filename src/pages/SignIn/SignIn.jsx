@@ -1,17 +1,17 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const { userSignIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignInForm = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     userSignIn(email, password)
       .then((result) => {
@@ -22,7 +22,7 @@ const SignIn = () => {
           text: "Sign In Successful",
         });
 
-        navigate("/");
+        navigate(location.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err);
