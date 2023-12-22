@@ -43,6 +43,9 @@ const Navbar = () => {
           <li>
             <NavLink to="/addTask">Add Task</NavLink>
           </li>
+          <li>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
           <button
             onClick={handleSignOut}
             className="sign-out-btn px-4 py-2 ml-[5px]"

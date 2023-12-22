@@ -1,7 +1,78 @@
 const AddTask = () => {
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const description = form.description.value;
+    const deadline = form.deadline.value;
+    const priority = form.priority.value;
+    console.log(title, description, deadline, priority);
+  };
+
   return (
     <div>
-      <h2>Add task page.</h2>
+      <div className="container mx-auto py-28">
+        <h2 className="text-center font-bold text-3xl">Add task</h2>
+        <form
+          onSubmit={handleAddTask}
+          className="card-body w-3/4 mx-auto border rounded-lg mt-12"
+        >
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Description</span>
+            </label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Description"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Deadline</span>
+            </label>
+            <input
+              type="date"
+              name="deadline"
+              placeholder="Deadline"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Priority</span>
+            </label>
+            <select
+              name="priority"
+              required
+              className="select select-bordered w-full"
+            >
+              <option value="">Select task priority</option>
+              <option value="low">Low</option>
+              <option value="moderate">Moderate</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div className="form-control mt-6">
+            <button className="btn btn-primary">Add Task</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
