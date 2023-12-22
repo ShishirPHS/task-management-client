@@ -41,7 +41,7 @@ const Navbar = () => {
       {user ? (
         <>
           <li>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard/allTasks">Dashboard</NavLink>
           </li>
           <button
             onClick={handleSignOut}

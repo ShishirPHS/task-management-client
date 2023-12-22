@@ -12,6 +12,9 @@ const Dashboard = () => {
               <NavLink to="/dashboard/profile">Profile</NavLink>
             </li>
             <li>
+              <NavLink to="/dashboard/allTasks">All Tasks</NavLink>
+            </li>
+            <li>
               <NavLink to="/dashboard/addTask">Add Task</NavLink>
             </li>
             <div className="h-[1px] w-full bg-white my-4"></div>
