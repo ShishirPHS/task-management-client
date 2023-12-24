@@ -1,0 +1,16 @@
+.all-tasks table {
+  background: white;
+}
+
+.all-tasks table thead {
+  background: rgb(127, 122, 122);
+  color: white;
+}
+
+.all-tasks table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.all-tasks table thead th:last-child {
+  border-top-right-radius: 12px;
+}
