@@ -45,7 +45,7 @@ const AddTask = () => {
 
   return (
     <div>
-      <div className="container mx-auto py-28">
+      <div className="container mx-auto mt-5">
         <h2 className="text-center font-bold text-3xl">Add task</h2>
         <form
           onSubmit={handleAddTask}
