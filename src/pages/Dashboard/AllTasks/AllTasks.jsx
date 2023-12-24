@@ -1,12 +1,25 @@
 import TaskRow from "../../../components/Dashboard/TaskRow/TaskRow";
 import useAllTasks from "../../../hooks/useAllTasks/useAllTasks";
 import "./AllTasks.css";
+import { useDrop } from "react-dnd";
 
 const AllTasks = () => {
   const [allTasks, refetch] = useAllTasks();
   const toDo = allTasks.filter((task) => task.status === "to-do");
   const onGoing = allTasks.filter((task) => task.status === "on-going");
   const completed = allTasks.filter((task) => task.status === "completed");
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "TABLE_ROW",
+    drop: (item) => changeStatus(item.id),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+  const changeStatus = (id) => {
+    console.log(id);
+  };
 
   return (
     <div>

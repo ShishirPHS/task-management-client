@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
+import { useDrag } from "react-dnd";
 
 const TaskRow = ({ task, idx, refetchAllTasks }) => {
   const { _id, title, description, deadline, priority } = task;
@@ -30,8 +31,19 @@ const TaskRow = ({ task, idx, refetchAllTasks }) => {
     });
   };
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "TABLE_ROW",
+    item: { id: _id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   return (
-    <tr>
+    <tr
+      ref={drag}
+      className={`${isDragging ? "border-2 border-[#9e7070]" : ""}`}
+    >
       <th>{idx + 1}</th>
       <td>{title}</td>
       <td>{description}</td>

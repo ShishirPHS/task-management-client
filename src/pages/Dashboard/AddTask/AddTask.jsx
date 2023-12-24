@@ -49,7 +49,7 @@ const AddTask = () => {
         <h2 className="text-center font-bold text-3xl">Add task</h2>
         <form
           onSubmit={handleAddTask}
-          className="card-body w-full mx-auto border rounded-lg mt-12"
+          className="card-body w-full mx-auto border border-[#c8c1c1] rounded-lg mt-12"
         >
           <div className="form-control">
             <label className="label">
