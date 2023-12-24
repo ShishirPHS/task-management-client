@@ -15,7 +15,7 @@ const AllTasks = () => {
         {/* to-do */}
         <div>
           <h3 className="text-2xl font-bold mt-5 mb-6">To-Do</h3>
-          <div className="mb-5">
+          <div className="mb-10">
             <div className="overflow-x-auto">
               <table className="table table-zebra">
                 {/* head */}
@@ -26,6 +26,7 @@ const AllTasks = () => {
                     <th>Description</th>
                     <th>Deadline</th>
                     <th>Priority</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,7 +46,7 @@ const AllTasks = () => {
         {/* on-going */}
         <div>
           <h3 className="text-2xl font-bold mt-5 mb-6">Ongoing</h3>
-          <div className="mb-5">
+          <div className="mb-10">
             <div className="overflow-x-auto">
               <table className="table table-zebra">
                 {/* head */}
@@ -56,6 +57,7 @@ const AllTasks = () => {
                     <th>Description</th>
                     <th>Deadline</th>
                     <th>Priority</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 {/* body */}
@@ -76,7 +78,7 @@ const AllTasks = () => {
         {/* completed */}
         <div>
           <h3 className="text-2xl font-bold mt-5 mb-6">Completed</h3>
-          <div className="mb-5">
+          <div className="mb-10">
             <div className="overflow-x-auto">
               <table className="table table-zebra">
                 {/* head */}
@@ -87,6 +89,7 @@ const AllTasks = () => {
                     <th>Description</th>
                     <th>Deadline</th>
                     <th>Priority</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
