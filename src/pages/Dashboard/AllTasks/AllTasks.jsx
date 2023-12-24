@@ -1,5 +1,7 @@
+import Swal from "sweetalert2";
 import TaskRow from "../../../components/Dashboard/TaskRow/TaskRow";
 import useAllTasks from "../../../hooks/useAllTasks/useAllTasks";
+import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic";
 import "./AllTasks.css";
 import { useDrop } from "react-dnd";
 
@@ -8,17 +10,37 @@ const AllTasks = () => {
   const toDo = allTasks.filter((task) => task.status === "to-do");
   const onGoing = allTasks.filter((task) => task.status === "on-going");
   const completed = allTasks.filter((task) => task.status === "completed");
+  const axiosPublic = useAxiosPublic();
 
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [, dropToDo] = useDrop(() => ({
     accept: "TABLE_ROW",
-    drop: (item) => changeStatus(item.id),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
+    drop: (item) => changeStatus(item.id, "to-do"),
   }));
 
-  const changeStatus = (id) => {
-    console.log(id);
+  const [, dropOngoing] = useDrop(() => ({
+    accept: "TABLE_ROW",
+    drop: (item) => changeStatus(item.id, "on-going"),
+  }));
+
+  const [, dropCompleted] = useDrop(() => ({
+    accept: "TABLE_ROW",
+    drop: (item) => changeStatus(item.id, "completed"),
+  }));
+
+  const changeStatus = (id, table) => {
+    console.log(`dropped ${id} to ${table} table.`);
+    const changedTask = { status: table };
+    axiosPublic
+      .patch(`/api/user/task/update/status/${id}`, changedTask)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Status Updated Successfully",
+            icon: "success",
+          });
+          refetch();
+        }
+      });
   };
 
   return (
@@ -30,7 +52,7 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">To-Do</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table className="table table-zebra">
+              <table ref={dropToDo} className="table table-zebra">
                 {/* head */}
                 <thead>
                   <tr>
@@ -61,7 +83,7 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">Ongoing</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table className="table table-zebra">
+              <table ref={dropOngoing} className="table table-zebra">
                 {/* head */}
                 <thead>
                   <tr>
@@ -93,7 +115,7 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">Completed</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table className="table table-zebra">
+              <table ref={dropCompleted} className="table table-zebra">
                 {/* head */}
                 <thead>
                   <tr>
