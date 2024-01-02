@@ -27,22 +27,31 @@ const AllTasks = () => {
     drop: (item) => changeStatus(item.id, "completed"),
   }));
 
-  const changeStatus = (id, table) => {
+  const changeStatus = async (id, table) => {
     console.log(`dropped ${id} to ${table} table.`);
     const changedTask = { status: table };
-    axiosPublic
-      .patch(`/api/user/task/update/status/${id}`, changedTask)
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            text: "Status Updated Successfully",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1200,
-          });
-          refetch();
-        }
+    try {
+      const res = await axiosPublic.patch(
+        `/api/user/task/update/status/${id}`,
+        changedTask
+      );
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          text: "Status Updated Successfully",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        refetch();
+      }
+    } catch (error) {
+      console.log("Error updating status:", error);
+      Swal.fire({
+        title: "Something Went Wrong",
+        text: "Please try again after refreshing the page.",
+        icon: "error",
       });
+    }
   };
 
   return (
@@ -74,7 +83,7 @@ const AllTasks = () => {
                   <tbody>
                     {toDo?.map((task, idx) => (
                       <TaskRow
-                        key={idx}
+                        key={task._id}
                         idx={idx}
                         task={task}
                         refetchAllTasks={refetch}
@@ -112,7 +121,7 @@ const AllTasks = () => {
                   <tbody>
                     {onGoing?.map((task, idx) => (
                       <TaskRow
-                        key={idx}
+                        key={task._id}
                         idx={idx}
                         task={task}
                         refetchAllTasks={refetch}
@@ -149,7 +158,7 @@ const AllTasks = () => {
                   <tbody>
                     {completed?.map((task, idx) => (
                       <TaskRow
-                        key={idx}
+                        key={task._id}
                         idx={idx}
                         task={task}
                         refetchAllTasks={refetch}
