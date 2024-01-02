@@ -38,9 +38,15 @@ const AllTasks = () => {
             text: "Status Updated Successfully",
             icon: "success",
             showConfirmButton: false,
-            timer: 1500,
+            timer: 1200,
           });
           refetch();
+        } else {
+          Swal.fire({
+            title: "Something Went Wrong",
+            text: "Please try again after refreshing the page.",
+            icon: "error",
+          });
         }
       });
   };
