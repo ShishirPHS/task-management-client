@@ -41,12 +41,6 @@ const AllTasks = () => {
             timer: 1200,
           });
           refetch();
-        } else {
-          Swal.fire({
-            title: "Something Went Wrong",
-            text: "Please try again after refreshing the page.",
-            icon: "error",
-          });
         }
       });
   };
