@@ -7,7 +7,11 @@ const useAllTasks = () => {
   const { user } = useAuth();
 
   // load all tasks
-  const { data: allTasks = [], refetch } = useQuery({
+  const {
+    data: allTasks = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["allTasks"],
     queryFn: async () => {
       const result = await axiosPublic.get(`/api/user/task/get/${user.email}`);
@@ -15,7 +19,7 @@ const useAllTasks = () => {
     },
   });
 
-  return [allTasks, refetch];
+  return [allTasks, refetch, isLoading];
 };
 
 export default useAllTasks;

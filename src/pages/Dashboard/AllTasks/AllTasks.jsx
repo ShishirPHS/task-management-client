@@ -6,7 +6,7 @@ import "./AllTasks.css";
 import { useDrop } from "react-dnd";
 
 const AllTasks = () => {
-  const [allTasks, refetch] = useAllTasks();
+  const [allTasks, refetch, isLoading] = useAllTasks();
   const toDo = allTasks.filter((task) => task.status === "to-do");
   const onGoing = allTasks.filter((task) => task.status === "on-going");
   const completed = allTasks.filter((task) => task.status === "completed");
@@ -35,7 +35,7 @@ const AllTasks = () => {
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({
-            title: "Status Updated Successfully",
+            text: "Status Updated Successfully",
             icon: "success",
             showConfirmButton: false,
             timer: 1500,
@@ -54,29 +54,35 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">To-Do</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table ref={dropToDo} className="table table-zebra">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Task Title</th>
-                    <th>Description</th>
-                    <th>Deadline</th>
-                    <th>Priority</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {toDo?.map((task, idx) => (
-                    <TaskRow
-                      key={idx}
-                      idx={idx}
-                      task={task}
-                      refetchAllTasks={refetch}
-                    ></TaskRow>
-                  ))}
-                </tbody>
-              </table>
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <span className="text-center loading loading-spinner loading-sm"></span>
+                </div>
+              ) : (
+                <table ref={dropToDo} className="table table-zebra">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Task Title</th>
+                      <th>Description</th>
+                      <th>Deadline</th>
+                      <th>Priority</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {toDo?.map((task, idx) => (
+                      <TaskRow
+                        key={idx}
+                        idx={idx}
+                        task={task}
+                        refetchAllTasks={refetch}
+                      ></TaskRow>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
@@ -85,30 +91,36 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">Ongoing</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table ref={dropOngoing} className="table table-zebra">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Task Title</th>
-                    <th>Description</th>
-                    <th>Deadline</th>
-                    <th>Priority</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                {/* body */}
-                <tbody>
-                  {onGoing?.map((task, idx) => (
-                    <TaskRow
-                      key={idx}
-                      idx={idx}
-                      task={task}
-                      refetchAllTasks={refetch}
-                    ></TaskRow>
-                  ))}
-                </tbody>
-              </table>
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <span className="text-center loading loading-spinner loading-sm"></span>
+                </div>
+              ) : (
+                <table ref={dropOngoing} className="table table-zebra">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Task Title</th>
+                      <th>Description</th>
+                      <th>Deadline</th>
+                      <th>Priority</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  {/* body */}
+                  <tbody>
+                    {onGoing?.map((task, idx) => (
+                      <TaskRow
+                        key={idx}
+                        idx={idx}
+                        task={task}
+                        refetchAllTasks={refetch}
+                      ></TaskRow>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
@@ -117,29 +129,35 @@ const AllTasks = () => {
           <h3 className="text-2xl font-bold mt-5 mb-6">Completed</h3>
           <div className="mb-10">
             <div className="overflow-x-auto">
-              <table ref={dropCompleted} className="table table-zebra">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Task Title</th>
-                    <th>Description</th>
-                    <th>Deadline</th>
-                    <th>Priority</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {completed?.map((task, idx) => (
-                    <TaskRow
-                      key={idx}
-                      idx={idx}
-                      task={task}
-                      refetchAllTasks={refetch}
-                    ></TaskRow>
-                  ))}
-                </tbody>
-              </table>
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <span className="text-center loading loading-spinner loading-sm"></span>
+                </div>
+              ) : (
+                <table ref={dropCompleted} className="table table-zebra">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Task Title</th>
+                      <th>Description</th>
+                      <th>Deadline</th>
+                      <th>Priority</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {completed?.map((task, idx) => (
+                      <TaskRow
+                        key={idx}
+                        idx={idx}
+                        task={task}
+                        refetchAllTasks={refetch}
+                      ></TaskRow>
+                    ))}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>
