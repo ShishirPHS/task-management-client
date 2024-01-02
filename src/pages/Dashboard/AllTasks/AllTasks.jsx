@@ -37,6 +37,8 @@ const AllTasks = () => {
           Swal.fire({
             title: "Status Updated Successfully",
             icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
           });
           refetch();
         }
